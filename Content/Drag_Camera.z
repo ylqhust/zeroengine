@@ -1,0 +1,64 @@
+/**
+author : ylq
+**/
+
+class Drag_Camera : ZilchComponent
+{
+    [Property]
+    //the camera move speed
+    var Move_Speed : Real = 10;
+    
+    var Left_Mouse_Statu : Boolean = false;
+    
+    var Mouse_Begin_Move_Position : Real3 = Real3(0.0,0.0,0.0);
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+       // Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Space,Events.LeftMouseDown,this.OnLeftMouseDown);
+        Zero.Connect(this.Space,Events.LeftMouseUp,this.OnLeftMouseUp);
+        Zero.Connect(this.Space,Events.MouseMove,this.OnMouseMove);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        
+    }
+    
+    function OnLeftMouseDown(event : MouseEvent)
+    {
+        var screenPos = Zero.Mouse.ScreenPosition;
+        var mousePos = this.LevelSettings.CameraViewport.ScreenToWorldZPlane(screenPos,0.0);
+        this.Mouse_Begin_Move_Position = mousePos;
+        this.Left_Mouse_Statu = true;
+       // Console.WriteLine("Left Mouse Down");
+    }
+    function OnLeftMouseUp(event : MouseEvent)
+    {
+        this.Left_Mouse_Statu = false;
+       // Console.WriteLine("Left Mouse Up");
+    }
+    
+    function OnMouseMove(event : MouseEvent)
+    {
+        
+        if (this.Left_Mouse_Statu)
+        {
+         //   Console.WriteLine("Mouse Move");
+            var screenPos = Zero.Mouse.ScreenPosition;
+            var mousePos = this.LevelSettings.CameraViewport.ScreenToWorldZPlane(screenPos,0.0);
+            var move = mousePos - this.Mouse_Begin_Move_Position;
+            this.Owner.Transform.Translation -= this.Speed(move);
+            this.Mouse_Begin_Move_Position = mousePos;
+        }
+    }
+    
+    function Speed(real3 : Real3) : Real3
+    {
+        real3.X *= this.Move_Speed*0.0167;
+        real3.Y *= this.Move_Speed*0.0167;
+        real3.Y *= this.Move_Speed*0.0167;
+        return real3;
+    }
+}

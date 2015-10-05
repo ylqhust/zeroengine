@@ -1,0 +1,36 @@
+class DynamicSpread : ZilchComponent
+{
+    [Property]
+    var FinalX : Integer = 30;
+    [Property]
+    var FinalY : Integer = 20;
+    [Property]
+    var SpreadSpeedX : Integer = 30;
+    [Property]
+    var SpreadSpeedY : Integer = 20;
+    [Property]
+    var Active : Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if (this.Active == true)
+        {
+            this.Spread(event.Dt);
+        }
+        if (this.Owner.Transform.Scale.X >= this.FinalX)
+        {
+            this.Active = false;
+        }
+    }
+    
+    function Spread(dt : Real)
+    {
+        var scale = Real3(dt*this.SpreadSpeedX,dt*this.SpreadSpeedY,0);
+        this.Owner.Transform.Scale += scale;
+    }
+}

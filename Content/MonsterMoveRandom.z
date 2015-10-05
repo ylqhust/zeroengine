@@ -1,0 +1,64 @@
+class MonsterMoveRandom : ZilchComponent
+{
+    var BeginPosition : Real3;
+    [Property]
+    var MoveRadius : Real = 2;
+    [Property]
+    var MoveSpeed : Real = 5;
+    
+    var StaticCount : Integer = 0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.BeginPosition = this.Owner.Transform.Translation;
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var x = this.GetRandom();
+        var y = this.GetRandom();
+        if (this.CheckInCircle(x,y,event.Dt))
+        {
+            if (this.StaticCount != 0)
+            {
+                this.StaticCount = 0;
+            }
+            var movement = Real3(event.Dt * x*this.MoveSpeed,event.Dt*y*this.MoveSpeed,0);
+            this.Owner.Transform.Translation += movement;
+        }
+        else
+        {
+            this.StaticCount += 1;
+            if (this.StaticCount > 100)
+            {
+                this.BeginPosition = this.Owner.Transform.Translation;
+                this.StaticCount = 0;
+            }
+            return;
+        }
+    }
+    
+    function GetRandom() : Real
+    {
+        var random = new Random();
+        return random.Range(-3,3);
+    }
+    
+    function CheckInCircle(x : Real,y : Real,dt : Real) : Boolean
+    {
+       var distance = this.GetDistance(x,y,dt);
+       if (distance > this.MoveRadius)
+       return false;
+       return true;
+    }
+    
+    function GetDistance(x : Real,y : Real,dt : Real) : Real
+    {
+        var x1 = this.Owner.Transform.Translation.X + x*dt*this.MoveSpeed;
+        var y1 = this.Owner.Transform.Translation.Y + y*dt*this.MoveSpeed;
+        var x2 = this.BeginPosition.X;
+        var y2 = this.BeginPosition.Y;
+        return Math.Sqrt(Math.Pow(x1-x2,2)+Math.Pow(y1-y2,2));
+    }
+}

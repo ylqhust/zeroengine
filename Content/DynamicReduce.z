@@ -1,0 +1,36 @@
+class DynamicReduce : ZilchComponent
+{
+    [Property]
+    var FinalX : Integer = 1;
+    [Property]
+    var FinalY : Integer = 1;
+    [Property]
+    var ReduceSpeedX : Integer = 10;
+    [Property]
+    var ReduceSpeedY : Integer = 5;
+    [Property]
+    var Active : Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if (this.Active)
+        {
+            this.Reduce(event.Dt);
+        }
+        if (this.Owner.Transform.Scale.X <= this.FinalX)
+        {
+            this.Active = false;
+        }
+    }
+    
+    function Reduce(dt : Real)
+    {
+        var scale = Real3(dt*this.ReduceSpeedX,dt*this.ReduceSpeedY,0);
+        this.Owner.Transform.Scale -= scale;
+    }
+}

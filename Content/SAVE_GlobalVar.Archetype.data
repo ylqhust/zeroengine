@@ -1,0 +1,19 @@
+Cog = 
+{
+	LinkId = 
+	{
+		uint Id = 1,
+	},
+	Named = 
+	{
+		string Name = "SAVE_GlobalVar",
+	},
+	Archetyped = 
+	{
+		string Name = "565946606c7db605:SAVE_GlobalVar",
+	},
+	SAVE_GlobalVar = 
+	{
+		bool IfNewGame = true,
+	},
+},

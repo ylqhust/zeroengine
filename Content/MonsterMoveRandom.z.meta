@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "MonsterMoveRandom",
+		uint64 ResourceId = 56517639c2808a2a,
+	},
+},

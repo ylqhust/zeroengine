@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "SGV_Controller",
+		uint64 ResourceId = 565946005fa8960e,
+	},
+},

@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "Activity",
+		uint64 ResourceId = 565948626471bcb4,
+	},
+},

@@ -1,0 +1,60 @@
+class MoveToPlayer : ZilchComponent
+{
+    [Property]
+    var ScanRadius : Real = 3;
+    [Property]
+    var MoveSpeed : Real = 5;
+    
+    [Property]
+    var PlayerName : String = "Player";
+    
+    var PlayerObj : Cog = null;
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.PlayerObj = this.Space.FindObjectByName(this.PlayerName);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if (this.PlayerObj == null)
+        {
+            this.PlayerObj = this.Space.FindObjectByName(this.PlayerName);
+            return;
+        }
+        
+        var distance = this.GetDistance();
+      //  Console.WriteLine("Distance : `distance`");
+        if (distance < this.ScanRadius)
+        {
+            //move the monster to the player
+            this.MTP(event.Dt);
+        }
+        return;
+    }
+    
+    //get the distance between this obj and the player
+    
+    function GetDistance() : Real
+    {
+        var x1 = this.Owner.Transform.Translation.X;
+        var y1 = this.Owner.Transform.Translation.Y;
+        var x2 = this.PlayerObj.Transform.Translation.X;
+        var y2 = this.PlayerObj.Transform.Translation.Y;
+        return Math.Sqrt(Math.Pow(x1-x2,2)+Math.Pow(y1-y2,2));
+    }
+    
+    //move to player
+    function MTP(dt : Real)
+    {
+        var x1 = this.Owner.Transform.Translation.X;
+        var y1 = this.Owner.Transform.Translation.Y;
+        var x2 = this.PlayerObj.Transform.Translation.X;
+        var y2 = this.PlayerObj.Transform.Translation.Y;
+        var movement = Real3((x2-x1)*dt*this.MoveSpeed,(y2-y1)*dt*this.MoveSpeed,0);
+        this.Owner.Transform.Translation += movement;
+    }
+}

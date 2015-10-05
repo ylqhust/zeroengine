@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "Runtime_GlobalVar",
+		uint64 ResourceId = 5659496738d6d75a,
+	},
+},

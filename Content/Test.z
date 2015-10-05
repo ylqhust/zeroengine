@@ -1,0 +1,29 @@
+class Test : ZilchComponent
+{
+    function Initialize(init : CogInitializer)
+    {
+        this.Space.SGS_Controller.ChangeIfSound(false);
+        this.Space.SPA_Controller.ChangeLevel(2);
+        Console.WriteLine("Level:`this.Space.SPA_Controller.GetLevel()`");
+        Zero.Connect(Zero.Keyboard,Events.KeyDown,this.OnKeyDown);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+    
+    function OnKeyDown(event : KeyboardEvent)
+    {
+        if (event.Key == Keys.B)
+        {
+            this.Owner.DynamicReduce.Active = false;
+            this.Owner.DynamicSpread.Active = true;
+            
+        }
+        if (event.Key == Keys.S)
+        {
+            this.Owner.DynamicSpread.Active = false;
+            this.Owner.DynamicReduce.Active = true;
+        }
+    }
+}

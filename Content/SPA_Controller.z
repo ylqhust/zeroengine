@@ -1,0 +1,130 @@
+class SPA_Controller : ZilchComponent
+{
+    var SPA : Cog = null;
+    var ThisFileName : String = "SPA";
+    var ThisArchetypeName : String = "SAVE_PlayerAttributes";
+    
+    function Initialize(init : CogInitializer)
+    {
+        Console.WriteLine("SPA Work...");
+        this.SPA = Zero.ObjectStore.RestoreOrArchetype(this.ThisFileName,this.ThisArchetypeName,this.Space);
+        
+        if (this.SPA != null)
+        {
+            Console.WriteLine("SGS bind success");
+        }
+    }
+    
+    function ChangeLevel(level : Integer)
+    {
+        this.CheckIfNull();
+        this.SPA.SAVE_PlayerAttributes.Level = level;
+        Zero.ObjectStore.Store(this.ThisFileName,this.SPA);
+    }
+    function GetLevel() : Integer
+    {
+        this.CheckIfNull();
+        return this.SPA.SAVE_PlayerAttributes.Level;
+    }
+    
+    function ChangeLife(life : Real)
+    {
+        this.CheckIfNull();
+        this.SPA.SAVE_PlayerAttributes.Life = life;
+        Zero.ObjectStore.Store(this.ThisFileName,this.SPA);
+    }
+    function GetLife() : Real
+    {
+        this.CheckIfNull();
+        return this.SPA.SAVE_PlayerAttributes.Life;
+    }
+    
+    function ChangeAttack(attack : Real)
+    {
+        this.CheckIfNull();
+        this.SPA.SAVE_PlayerAttributes.Attack = attack;
+        Zero.ObjectStore.Store(this.ThisFileName,this.SPA);
+    }
+    function GetAttack() : Real
+    {
+        this.CheckIfNull();
+        return this.SPA.SAVE_PlayerAttributes.Attack;
+    }
+    
+    function ChangeDefence(defence : Real)
+    {
+        this.CheckIfNull();
+        this.SPA.SAVE_PlayerAttributes.Defence = defence;
+        Zero.ObjectStore.Store(this.ThisFileName,this.SPA);
+    }
+    function GetDefence() : Real
+    {
+        this.CheckIfNull();
+        return this.SPA.SAVE_PlayerAttributes.Defence;
+    }
+    
+    function ChangeMoney(money : Integer)
+    {
+        this.CheckIfNull();
+        this.SPA.SAVE_PlayerAttributes.Money = money;
+        Zero.ObjectStore.Store(this.ThisFileName,this.SPA);
+    }
+    function GetMoney() : Integer
+    {
+        this.CheckIfNull();
+        return this.SPA.SAVE_PlayerAttributes.Money;
+    }
+    
+    function ChangeCurrentExperience(currentExperience : Integer)
+    {
+        this.CheckIfNull();
+        this.SPA.SAVE_PlayerAttributes.CurrentExperience = currentExperience;
+        Zero.ObjectStore.Store(this.ThisFileName,this.SPA);
+    }
+    function GetCurrentExperience() : Integer
+    {
+        this.CheckIfNull();
+        return this.SPA.SAVE_PlayerAttributes.CurrentExperience;
+    }
+    
+    function ChangeNextExperience(nextExperience : Integer)
+    {
+        this.CheckIfNull();
+        this.SPA.SAVE_PlayerAttributes.NextExperience = nextExperience;
+        Zero.ObjectStore.Store(this.ThisFileName,this.SPA);
+    }
+    function GetNextExperience() : Integer
+    {
+        this.CheckIfNull();
+        return this.SPA.SAVE_PlayerAttributes.NextExperience;
+    }
+    
+    
+    
+    
+    
+    
+    
+
+    function CheckIfNull()
+    {
+        if (this.SPA == null)
+        {
+             this.SPA = Zero.ObjectStore.RestoreOrArchetype(this.ThisFileName,this.ThisArchetypeName,this.Space);
+        }
+        return;
+    }
+    
+    //reset all attributes
+    function ResetAll()
+    {
+        this.ChangeLife(100);
+        this.ChangeLevel(1);
+        this.ChangeMoney(1000);
+        this.ChangeAttack(100);
+        this.ChangeDefence(100);
+        this.ChangeCurrentExperience(0);
+        this.ChangeNextExperience(100);
+    }
+    
+}

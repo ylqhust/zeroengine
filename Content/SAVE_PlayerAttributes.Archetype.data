@@ -1,0 +1,29 @@
+Cog = 
+{
+	LinkId = 
+	{
+		uint Id = 1,
+	},
+	Named = 
+	{
+		string Name = "SAVE_PlayerAttributes",
+	},
+	Archetyped = 
+	{
+		string Name = "565572612b3557ed:SAVE_PlayerAttributes",
+	},
+	SAVE_PlayerAttributes = 
+	{
+		int Level = 1,
+		float Life = 100,
+		float Attack = 100,
+		float Defence = 100,
+		int Money = 1000,
+		int CurrentExperience = 0,
+		int NextExperience = 100,
+		float MingZhong = 1,
+		float ShanBi = 0.100000001,
+		float BaoJi = 0.300000012,
+		float RenXing = 0.100000001,
+	},
+},

@@ -1,0 +1,28 @@
+Cog = 
+{
+	Project = 
+	{
+		string ProjectName = "crazy_ox",
+		string ProjectOwner = "",
+		string DefaultLevel = "Level",
+		string ProjectSpace = "Space",
+		string ProjectFolder = "C:\Users\apple\Documents\ZeroProjects\crazy_ox",
+		uint ProjectEngineRevision = 12259,
+		bool AutoTakeProjectScreenshot = true,
+	},
+	EditorSettings = 
+	{
+		EditorMode EditorMode = Mode2D,
+		bool ViewCube = true,
+		float ViewCubeViewportSize = 150,
+		ScriptReloadMethod ScriptReloadEditor = ReInitializeObjects,
+		ScriptReloadMethod ScriptReloadGame = PatchObjects,
+		bool AutoUpdateContentChanges = true,
+	},
+	ProjectDescription = 
+	{
+		string ShortDescription = "",
+		string LongDescription = "",
+		string Tags = "",
+	},
+},

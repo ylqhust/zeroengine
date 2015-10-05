@@ -1,0 +1,5 @@
+class SAVE_GameSettings : ZilchComponent
+{
+   [Serialized]
+   var IfSound : Boolean = true;
+}

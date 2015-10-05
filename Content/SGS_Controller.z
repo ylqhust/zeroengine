@@ -1,0 +1,42 @@
+class SGS_Controller : ZilchComponent
+{
+    var SGS : Cog = null;
+    var ThisFileName : String = "SGS";
+    var ThisArcheTypeName : String = "SAVE_GameSettings";
+    function Initialize(init : CogInitializer)
+    {
+        Console.WriteLine("SGS Work...");
+        //load file from filesystem
+        //param1 fileName in fileSystem
+        //param2 archetype bind to the file
+        //param3 space
+        this.SGS = Zero.ObjectStore.RestoreOrArchetype(this.ThisFileName,this.ThisArcheTypeName,this.Space);
+        
+        if (this.SGS != null)
+        {
+            Console.WriteLine("SGS bind success");
+        }
+    }
+    
+    function ChangeIfSound(boolean : Boolean)
+    {
+        this.CheckIfNull();
+        this.SGS.SAVE_GameSettings.IfSound = boolean;
+        Zero.ObjectStore.Store(this.ThisFileName,this.SGS);
+    }
+    
+    function GetIfSound() : Boolean
+    {
+        this.CheckIfNull();
+        return this.SGS.SAVE_GameSettings.IfSound;
+    }
+    
+    function CheckIfNull()
+    {
+        if (this.SGS == null)
+        {
+             this.SGS = Zero.ObjectStore.RestoreOrArchetype(this.ThisFileName,this.ThisArcheTypeName,this.Space);
+        }
+        return;
+    }
+}

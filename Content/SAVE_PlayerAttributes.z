@@ -1,0 +1,17 @@
+class SAVE_PlayerAttributes : ZilchComponent
+{
+   [Serialized]
+   var Level : Integer = 1;
+   [Serialized]
+   var Life : Real = 100;
+   [Serialized]
+   var Attack : Real = 100;
+   [Serialized]
+   var Defence : Real = 100;
+   [Serialized]
+   var Money : Integer = 1000;
+   [Serialized]
+   var CurrentExperience : Integer = 0;
+   [Serialized]
+   var NextExperience : Integer = 100;
+}

@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "DynamicReduce",
+		uint64 ResourceId = 565acbc1a998eb32,
+	},
+},

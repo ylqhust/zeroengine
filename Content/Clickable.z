@@ -1,0 +1,74 @@
+class Clickable : ZilchComponent
+{
+    [Dependency]
+    var Transform:Transform;
+    var ThisTranslation : Real3;
+    var ThisScal : Real3;
+    var XRight : Real;
+    var XLeft : Real;
+    var YTop : Real;
+    var YBottom : Real;
+    
+    //must reset depend different view
+    var ClickType : String = "DialogType";
+    
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        this.ThisTranslation = this.Owner.Transform.Translation;
+        this.ThisScal = this.Owner.Transform.Scale;
+        this.InitBoard();
+        Zero.Connect(this.Space,Events.LeftMouseDown,this.OnLeftMouseDown);
+        
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+    
+    function OnLeftMouseDown(event : MouseEvent)
+    {
+        if (this.Space.Runtime_GlobalVar.IfExistDialog == true)
+        {
+            if (this.ClickType != "DialogType")
+            {
+                return;
+            }
+        }
+            var screenPos = Zero.Mouse.ScreenPosition;
+            var mousePos = this.LevelSettings.CameraViewport.ScreenToWorldZPlane(screenPos,0.0);
+            if (this.CheckIfInBoard(mousePos))
+            {
+               this.OnClick();
+            }
+            else
+            {
+                Console.WriteLine("UnClick");
+                Console.WriteLine("UnClick Name : `this.Owner.Name`");
+            }
+    }
+    
+    function CheckIfInBoard(mousePos : Real3) : Boolean
+    {
+        if (mousePos.X < this.XRight && mousePos.X > this.XLeft && mousePos.Y < this.YTop && mousePos.Y > this.YBottom)
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    function InitBoard()
+    {
+        this.XRight = this.ThisTranslation.X + this.ThisScal.X/2;
+        this.XLeft = this.ThisTranslation.X - this.ThisScal.X/2;
+        this.YTop = this.ThisTranslation.Y + this.ThisScal.Y/2;
+        this.YBottom = this.ThisTranslation.Y - this.ThisScal.Y/2;
+        Console.WriteLine("XR:`this.XRight`\nXL:`this.XLeft`\nYT:`this.YTop`\nYB:`this.YBottom`");
+    }
+    
+    function OnClick()
+    {
+        //implement method
+        
+    }
+}

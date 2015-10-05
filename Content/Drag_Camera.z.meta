@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "Drag_Camera",
+		uint64 ResourceId = 55a6e65f9cd6b9eb,
+	},
+},

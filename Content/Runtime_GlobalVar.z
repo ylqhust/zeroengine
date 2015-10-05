@@ -1,0 +1,7 @@
+class Runtime_GlobalVar : ZilchComponent
+{
+   var IfExistDialog : Boolean = false;
+   
+   
+  
+}

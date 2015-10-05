@@ -1,0 +1,7 @@
+ContentLibrary = 
+{
+	string Name = "crazy_ox",
+	uint64 LibraryId = 55a6ff34820ad159,
+	string SourceControlType = "",
+	bool ReadOnly = false,
+},

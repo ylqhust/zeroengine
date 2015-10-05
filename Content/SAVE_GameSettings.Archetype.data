@@ -1,0 +1,15 @@
+Cog = 
+{
+	LinkId = 
+	{
+		uint Id = 1,
+	},
+	Named = 
+	{
+		string Name = "SAVE_GameSettings",
+	},
+	SAVE_GameSettings = 
+	{
+		bool IfSound = true,
+	},
+},

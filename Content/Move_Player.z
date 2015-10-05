@@ -1,0 +1,55 @@
+/**
+author : ylq
+**/
+class Move_Player : ZilchComponent
+{
+    //set the speed key to move up ,down left right
+    [Property]
+    //default left key is A
+    var Move_Left : Keys = Keys.A;
+    
+     [Property]
+    //default Right key is D
+    var Move_Right : Keys = Keys.D;
+    
+     [Property]
+    //default up key is W
+    var Move_Up : Keys = Keys.W;
+    
+     [Property]
+    //default down key is S
+    var Move_Down : Keys = Keys.S;
+    
+    [Property]
+    //default the player move speed
+    var Move_Speed : Real = 1;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var movement : Real3 = Real3(0.0,0.0,0.0);
+        if (Zero.Keyboard.KeyIsDown(this.Move_Left) || Zero.Keyboard.KeyIsDown(Keys.Left))
+        {
+            movement -= Real3(event.Dt*this.Move_Speed,0,0);
+        }
+        if (Zero.Keyboard.KeyIsDown(this.Move_Right) || Zero.Keyboard.KeyIsDown(Keys.Right))
+        {
+            movement += Real3(event.Dt*this.Move_Speed,0,0);
+        }
+        if (Zero.Keyboard.KeyIsDown(this.Move_Down) || Zero.Keyboard.KeyIsDown(Keys.Down))
+        {
+            movement -= Real3(0,this.Move_Speed*event.Dt,0);
+        }
+        if (Zero.Keyboard.KeyIsDown(this.Move_Up) || Zero.Keyboard.KeyIsDown(Keys.Up))
+        {
+            movement += Real3(0,this.Move_Speed*event.Dt,0);
+        }
+        
+        this.Owner.Transform.Translation += movement;
+      //  Console.WriteLine("camera position : `this.Owner.Transform.Translation`");
+    }
+}

@@ -1,0 +1,41 @@
+class SGV_Controller : ZilchComponent
+{
+   var SGV : Cog = null;
+   var ThisFileName : String = "SGV";
+   var ThisArchetypeName : String = "SAVE_GlobalVar";
+   
+   function Initialize(init : CogInitializer)
+   {
+       Console.WriteLine("SGV work...");
+       this.SGV = Zero.ObjectStore.RestoreOrArchetype(this.ThisFileName,this.ThisArchetypeName,this.Space);
+       if (this.SGV != null)
+       {
+           Console.WriteLine("SGV bind Success");
+       }
+   }
+   
+   function ChangeIfNewGame(boolean : Boolean)
+   {
+       this.CheckIfNull();
+       this.SGV.SAVE_GlobalVar.IfNewGame = boolean;
+       Zero.ObjectStore.Store(this.ThisFileName,this.SGV);
+       return;
+   }
+   
+   function GetIfNewGame() : Boolean
+   {
+       this.CheckIfNull();
+       return this.SGV.SAVE_GlobalVar.IfNewGame;
+   }
+   
+   
+   function CheckIfNull()
+   {
+       if (this.SGV == null)
+       {
+           this.SGV = Zero.ObjectStore.RestoreOrArchetype(this.ThisFileName,this.ThisArchetypeName,this.Space);
+       }
+       return;
+   }
+    
+}
